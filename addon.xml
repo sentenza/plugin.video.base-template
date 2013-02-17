@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon 
+	id="plugin.video.base-template" 
+	name="Video Plugin template" 
+	version="1.0" 
+	provider-name="skydiamond.org">
+
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Video Plugin Template</summary>
+  
+    <description lang="en">
+	    A base video plugin template
+
+	    skydiamond.org
+    </description>
+  
+    <description lang="it">
+	    Template di base per lo sviluppo di un plugin video
+	    
+	    skydiamond.org
+    </description>
+
+    <disclaimer lang="en">Feel free to use this GPL plugin template. For more information visit http://www.skydiamond.org/wiki/index.php?title=Add-on_XBMC.</disclaimer>
+
+    <license>GNU GENERAL PUBLIC LICENSE. Version 3, June 2007</license>
+  
+    <platform>all</platform>
+
+    <language>en it</language>
+
+    <website>http://skydiamond.org</website>
+
+    <source>https://github.com/sentenza/</source>
+  </extension>
+</addon>
