@@ -24,37 +24,53 @@ import xbmc
 import xbmcgui
 import xbmcplugin
 import xbmcaddon
+from resources.lib.plugincore import PluginCore
+
+### Plugin constants ###
+__plugin__ = "plugin.video.base-template"
+__author__ = "sentenza"
+
+Addon = xbmcaddon.Addon(id=__plugin__)
 
 # plugin handle
 handle = int(sys.argv[1])
 
+core = PluginCore()
+
 
 ### User Interface construction ###
 def show_folder(url=None):
-    ''' List the categories in the root folder of the plugin '''
+    ''' List the categories from the root to the leafs '''
 
-    list_mode = "folder" if url else "list"
+    list_mode = "folder" if url is None else "list"
 
+    categories = core.get_categories()
     ### EXAMPLE listing of 5 items
-    for i in range(1,6):
-        title = "Category item " + str(i)
-        item_url = "http://example.com/" + str(i)
+    for category in categories:
+        title = category["title"]
+        item_url = category["url"]
         list_item_style = xbmcgui.ListItem(title)
         add_item({"mode": list_mode, "url": item_url}, list_item_style)
     xbmcplugin.endOfDirectory(handle=handle, succeeded=True)
 
+
 def show_video_files(url):
     # TODO
-    pass
+    xbmcplugin.endOfDirectory(handle=handle, succeeded=True)
+
 
 def play_video(url):
     # TODO
-    pass
+    # Routine for parsing url
+    video_url = url
+    xbmc.Player().play(video_url)
 
 
 ### xbmcplugin based UI methods ###
 def add_item(parameters, li, folder=True):
-    ''' Adds an item to a listing directory. '''
+    ''' 
+    Adds an item to a listing directory. If folder==False a single item instead of a folder.
+    '''
     url = sys.argv[0] + '?' + urllib.urlencode(parameters)
     return xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li, isFolder=folder)
 
